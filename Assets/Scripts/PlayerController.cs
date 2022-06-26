@@ -23,10 +23,11 @@ public class PlayerController : MonoBehaviour
 
         if(moveDir != Vector2.zero)
         {
-            GameManager.Instance.Save();
+            
             if (CanMoveToDir(moveDir))
             {
                 // P G G
+                GameManager.Instance.Save();
                 Move(moveDir);
             }
             else
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
                     if (hits.Length == 2)
                     {
                         // P B B
+                        GameManager.Instance.Save();
                         Move(moveDir);
                         Box b0 = hits[0].collider.GetComponent<Box>();
                         Box b1 = hits[1].collider.GetComponent<Box>();
@@ -57,12 +59,14 @@ public class PlayerController : MonoBehaviour
                         if (dist > 1.5)
                         {
                             // P G B
+                            GameManager.Instance.Save();
                             Move(moveDir);
                             b0.Move(moveDir * -2.0f);
                         }
                         else
                         {
                             // P B G
+                            GameManager.Instance.Save();
                             Move(moveDir);
                             b0.Move(moveDir);
                         }

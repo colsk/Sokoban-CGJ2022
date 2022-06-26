@@ -10,6 +10,18 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     List<GameObject> MoveObjs = new List<GameObject>();
     Stack<List<GameObject>> stack = new Stack<List<GameObject>>();
+    List<GameObject> IniObjs = new List<GameObject>();
+
+    private void Start()
+    {
+        foreach (var item in MoveObjs)
+        {
+            GameObject tp = Instantiate(item.gameObject, item.transform.position, Quaternion.identity);
+            tp.SetActive(false);
+            IniObjs.Add(tp);
+        }
+
+    }
 
     private void Awake()
     {
@@ -42,12 +54,31 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
     IEnumerator LoadNextStage()
     {
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+
+    //public void resetstage()
+    //{
+
+    //    foreach (var item in moveobjs)
+    //    {
+    //        destroy(item);
+    //    }
+    //    foreach (var item in iniobjs)
+    //    {
+    //        item.setactive(true);
+    //    }
+    //    stack.push(iniobjs);
+
+
+
+
+    //}
     #region UnDo
     public void Rigist(GameObject obj)
     {
@@ -84,10 +115,6 @@ public class GameManager : MonoBehaviour
         {
             item.SetActive(true);        
         }
-            
-
-
-    
     }
 
 
